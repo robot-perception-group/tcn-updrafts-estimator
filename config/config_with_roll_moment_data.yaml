@@ -1,0 +1,89 @@
+# Training settings
+training:
+    experiment_name: ???  # e.g., version of config
+    description: ???  # You can add notes here
+    dataset_dir: ???  # Directory where the dataset is stored
+    use_roll_moment_data: True  # Note: Adjust "obs_dim" below accordingly.
+
+    epochs: 100  # Number of training epochs
+    mini_batch_size: 64  # Size of mini-batches
+    lr: 0.001  # Initial learning rate
+    lr_decay_steps: [50,95]  # Number of epochs before learning rate decays by factor 0.1
+    weight_decay: 0.00001  # L2 regularization
+    gradient_clipping: 1  # Perform gradient norm clipping?, False or value
+
+# Parameters describing mass and aerodynamic properties of glider
+glider:
+    m: 4.5  # Aircraft mass [kg]
+    s: 0.79  # Reference area [m^2]
+    st: 23.6  # Aspect ratio
+    oe: 0.95  # Oswald factor
+    cd0: 0.015  # Zero lift drag coefficient
+    derivative_cl_alpha: 5.7  # Derivative d c_l/d alpha [1/rad]
+
+# Environment parameters
+physics:
+    rho: 1.225  # Air density [kg/m^3]
+    g: 9.81  # Gravitational acceleration [m/s^2]
+
+# Control config
+control:
+    V_A_range: [10, 10]  # Bounds of the continuous uniform distribution the initial air speed is sampled from [m/s]
+    alpha_cmd: 6.29  # Constant commanded angle of attack [deg]
+    dist_switch_wp: 15  # Switch to next waypoint if distance to current waypoint is less than this value [m]
+    k_chi: 1.5  # Gain for lateral controller
+    phi_max: 45  # Max absolute roll angle [deg]
+    initial_altitude: 350  # Initial altitude of the glider [m]
+
+# Parameters of the zigzag lawnmower pattern
+path:
+    field_size: [1000, 1000]  # Size of the field (north, east) [m]
+    flight_area_size: [800, 800]  # Size of the flight area, which is centered in the field (north, east) [m]
+    delta_north: 100  # Distance between waypoints in north direction [m]
+    delta_east: 100  # Distance between waypoints in east direction [m]
+    delta_from_path: 20  # Distance between waypoints and the path center [m]
+
+# Parameters for the updraft physics
+updrafts:
+    n: [1, 3]  # Bounds of the discrete uniform distribution the number of updrafts is sampled from
+    probs_n: [0.2, 0.3, 0.5]  # Probability that 1, 2, 3, ... updraft(s) occur(s)
+    w_range: [2, 10]  # Bounds of the continuous uniform distribution the updraft strength values are sampled from [m/s]
+    r_range: [50, 100]  # Bounds of the continuous uniform distribution the updraft width values are sampled from [m]
+    pos_range: [[100, 900], [100, 900]] # Bounds of the continuous uniform distribution the updraft positions are sampled from (north, east) [m]
+    dist_min: 200  # Minimum distance between the centers of two updrafts [m]
+
+# Parameters for the horizontal wind
+horizontal_wind:
+    v: [0, 0]  # Velocity of the horizontal wind (north, east) [m/s]
+
+# Simulation parameters
+simulation:
+    dt_simulation: 0.02  # Sampling period of simulation [s]
+    add_noise: True  # Add the noise specified below to the simulated measurements?
+    noise_sd_w: 0.05  # Standard deviation of normally distributed noise for the updraft velocities [m/s]
+    noise_sd_l: 0.06 # Standard deviation of normally distributed noise for the roll moments induced by updrafts [Nm]
+    dt_output_sequence: 0.1  # Sampling period of output sequences [s]
+    output_sequence_length: 7000  # Desired minimum sequence length. Shorter sequences are discarded. Longer sequences are truncated.
+
+# Min and max values used to normalize the training data and labels/predictions
+normalization:
+    output_range: [0, 1]  # Range of the data after normalization
+    training_data_range:
+        p_n_gl: [80, 905]     # Glider position north [m]
+        p_e_gl: [80, 925]     # Glider position east [m]
+        w_th: [-0.5, 10.5]    # Updraft velocity [m/s]
+        L_th: [-12.5, 12.5]   # Induced roll moment [Nm]
+    labels_and_predictions_range:
+        p_n_th: [100, 900]  # Glider position north [m]
+        p_e_th: [100, 900]  # Glider position east [m]
+        w_th: [2, 10]       # Updraft velocity [m/s]
+        r_th: [50, 100]     # Updraft width [m]
+
+# Network settings
+network:
+    obs_dim: 4   # Dimension of input measurement vectors
+    emb_dim: 32  # Dimension of hidden space
+    out_dim: 12  # Dimension of output (= 4 x max number of updrafts)
+    elementwise_affine_transformation: False  # Apply elementwise affine transformation when applying layer normalization
+    activation: relu  # Activation function ("relu" or "leaky_relu")
+    init_weights_normal: True  # Sample the initial network weights from a normal distribution
