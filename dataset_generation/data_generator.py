@@ -24,7 +24,7 @@ class DataGenerator:
     """Class to generate the items of a dataset for ML-based thermal updraft detection."""
 
     def __init__(self, config, wind_physics_class, glider_physics_class, waypoints, path_transformations=None):
-        """Initiates a DataGenerator that generates the items of a dataset for ML-based thermal updraft detection."""
+        """Initiates a data generator that generates the items of a dataset for ML-based thermal updraft detection."""
         # Store config, glider/wind physics, and waypoints
         self.config = config
         self.waypoints = waypoints
