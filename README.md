@@ -58,6 +58,6 @@ tensorboard --logdir=runs  # Assuming that you execute this command in the code 
 ``` 
 Once you can see *TensorBoard* in your web browser, click on the tab *TEXT* to compare the TCN's estimates with the true updraft properties from the dataset. The TCN outputs the estimates, which are normalized as specified in the config file, in the following order:
 
-`[north pos. updraft #1, east pos. updraft #1, strength updraft #1, spread updraft #1, north pos. updraft #2, ...]`
+`[north pos. updraft #1, east pos. updraft #1, strength updraft #1, spread updraft #1, north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...]`
 
-Output values of `-1.00` indicate that no more updrafts were detected. For example, if only one updraft was encountered, the values of `north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...` will be approx. `-1.00`.
+Output values of `-1` indicate that no more updrafts were detected. For example, if only one updraft was encountered, the values of `north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...` will be approx. `-1`.
