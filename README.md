@@ -37,7 +37,7 @@ python generate_dataset.py config/config_with_roll_moment_data.yaml dataset_gene
 For further instructions, run `python generate_dataset.py --help`.
 
 
-## Training
+## Training and Validation
 The script `train.py` can be used to train and validate the TCN using the generated dataset.
 
 #### Example using the provided config:
