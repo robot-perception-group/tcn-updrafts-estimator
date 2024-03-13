@@ -27,7 +27,7 @@ In the folder `dataset_generation`, we further provide the waypoint file `waypoi
 ## Dataset Generation
 The script `generate_dataset.py` can be used to run simulations to generate a dataset for training and testing the TCN. 
 
-#### Example Using the Provided Config and Flight Path File:
+#### Example using the provided config and flight path:
 
 ```bash
 python generate_dataset.py config/config_with_roll_moment_data.yaml dataset_generation/waypoints.json --index_start 0 --index_end 39999 --output_dir datasets --dataset_name v1 --sub_folder train --transform_path  # Generates a training set
@@ -40,7 +40,7 @@ For further instructions, run `python generate_dataset.py --help`.
 ## Training
 The script `train.py` can be used to train and validate the TCN using the generated dataset.
 
-#### Example Using the Provided Config:
+#### Example using the provided config:
 
 ```bash
 python train.py config/config_with_roll_moment_data.yaml --dataset_dir datasets/v1 --checkpoints_folder checkpoints --models_folder models
@@ -48,7 +48,7 @@ python train.py config/config_with_roll_moment_data.yaml --dataset_dir datasets/
 
 For further instructions, run `python train.py --help`.
 
-#### TensorBoard Support and Format of the Output Estimates:
+#### TensorBoard support:
 
 The script supports *TensorBoard*. To inspect the training and validation progress, run the following commands in a separate terminal window, and open http://localhost:6006/ in your web browser:
 
@@ -56,8 +56,12 @@ The script supports *TensorBoard*. To inspect the training and validation progre
 conda activate tcn-updrafts-estimator
 tensorboard --logdir=runs  # Assuming that you execute this command in the code directory
 ``` 
-Once you can see *TensorBoard* in your web browser, click on the tab *TEXT* to compare the TCN's estimates with the true updraft properties from the dataset. The TCN outputs the estimates, which are normalized as specified in the config file, in the following order:
+Once you can see *TensorBoard* in your web browser, click on the tab *TEXT* to compare the TCN's estimates with the true updraft properties from the dataset. 
+
+#### Format of the output estimates:
+
+The TCN outputs the estimates, which are normalized as specified in the config file, in the following order:
 
 `[north pos. updraft #1, east pos. updraft #1, strength updraft #1, spread updraft #1, north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...]`
 
-Output values of `-1` indicate that no more updrafts were detected. For example, if only one updraft was encountered, the values of `north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...` will be approx. `-1`.
+Output values of -1 indicate that no more updrafts were detected. For example, if only one updraft was encountered, the values of `north pos. updraft #2, east pos. updraft #2, strength updraft #2, spread updraft #2, ...` will be approximately -1.
