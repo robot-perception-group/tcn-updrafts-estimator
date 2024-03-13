@@ -167,10 +167,14 @@ def main(args):
         writer.add_scalar(f"Loss/train", loss_train, epoch)
         writer.add_scalar(f"Loss/val", loss_val, epoch)
         writer.add_scalar(f"Lr", lr_scheduler.get_last_lr()[0], epoch)
+        example_label_train_str = np.array2string(example_label_train.detach().cpu().numpy(), precision=2, floatmode="fixed")
+        example_pred_train_str = np.array2string(example_pred_train.detach().cpu().numpy(), precision=2, floatmode="fixed")
+        example_label_val_str = np.array2string(example_label_val.cpu().numpy(), precision=2, floatmode="fixed")
+        example_pred_val_str = np.array2string(example_pred_val.cpu().numpy(), precision=2, floatmode="fixed")
         writer.add_text(f"Examples/train",
-                        f"True: {example_label_train}  \n Pred: {example_pred_train}", epoch)
+                        f"True: \n {example_label_train_str}  \n Pred: \n {example_pred_train_str}", epoch)
         writer.add_text(f"Examples/val",
-                        f"True: {example_label_val}  \n Pred: {example_pred_val}", epoch)
+                        f"True: \n {example_label_val_str}  \n Pred: \n {example_pred_val_str}", epoch)
 
         # Save checkpoint
         torch.save({'epoch': epoch,
