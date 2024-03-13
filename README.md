@@ -11,7 +11,7 @@ Exploiting thermal updrafts to gain altitude can significantly extend the endura
 The framework has been developed at the [Institute of Flight Mechanics and Controls (iFR)](https://www.ifr.uni-stuttgart.de/en) of the University of Stuttgart. The corresponding paper *End-to-End Thermal Updraft Detection and Estimation for Autonomous Soaring Using Temporal Convolutional Networks* has been accepted for presentation at the *2024 IEEE International Conference on Robotics and Automation (ICRA)*. The citation information will be added once the paper has been published.
 
 ## Getting Started
-Please execute these commands in a terminal to download the code, create a virtual environment using *conda*, and install the required packages:
+Please execute these commands in a terminal to download the code, create a virtual environment using [conda](https://docs.anaconda.com/free/miniconda/index.html), and install the required packages:
 
 ```bash
 git clone https://github.com/robot-perception-group/tcn-updrafts-estimator.git
