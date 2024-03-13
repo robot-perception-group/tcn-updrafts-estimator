@@ -30,7 +30,8 @@ The script `generate_dataset.py` can be used to run simulations to generate a da
 **Example using the provided config and flight path:**
 
 ```bash
-python generate_dataset.py config/config_with_roll_moment_data.yaml dataset_generation/waypoints.json --index_start 0 --index_end 24999 --output_dir datasets --dataset_name v1 --sub_folder train --transform_path
+python generate_dataset.py config/config_with_roll_moment_data.yaml dataset_generation/waypoints.json --index_start 0 --index_end 39999 --output_dir datasets --dataset_name v1 --sub_folder train --transform_path  # Generates a training set
+python generate_dataset.py config/config_with_roll_moment_data.yaml dataset_generation/waypoints.json --index_start 0 --index_end 9999 --output_dir datasets --dataset_name v1 --sub_folder val --transform_path  # Generates a validation set
 ```
 
 For further instructions, run `python generate_dataset.py --help`.
@@ -42,7 +43,7 @@ The script `train.py` can be used to train the TCN using the generated dataset.
 **Example using the provided config:**
 
 ```bash
-python train.py config/config_with_roll_moment_data.yaml --checkpoints_folder checkpoints --models_folder models
+python train.py config/config_with_roll_moment_data.yaml --dataset_dir datasets/v1 --checkpoints_folder checkpoints --models_folder models
 ```
 
 The script supports *TensorBoard*. To inspect the training progress, run the following commands in a separate terminal window, and open http://localhost:6006/ in a web browser:
