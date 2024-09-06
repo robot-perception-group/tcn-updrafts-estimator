@@ -8,10 +8,11 @@
 
 Exploiting thermal updrafts to gain altitude can significantly extend the endurance of fixed-wing aircraft, as has been demonstrated by human glider pilots for decades. In this repository, we present the code of a novel end-to-end deep learning approach for the simultaneous detection of multiple thermal updrafts and the estimation of their properties - a key capability to let autonomous unmanned aerial vehicles soar as well. In contrast to previous works, our approach does not require separate algorithms for the detection of individual updrafts. Instead, a sequence of sensor measurements from a time window of interest can be directly fed into our temporal convolutional network (TCN), which estimates the position, strength, and spread of the encountered updrafts. Our approach can reliably detect updrafts solely based on measurements of the aircraft's position and the local vertical wind velocity. Nevertheless, our method can additionally make use of measurements of the roll moment induced by updrafts, which improves the precision further.
 
-The corresponding paper *End-to-End Thermal Updraft Detection and Estimation for Autonomous Soaring Using Temporal Convolutional Networks* has been accepted for presentation at the *2024 IEEE International Conference on Robotics and Automation (ICRA)*. The citation information will be added once the paper has been published.
+The corresponding paper *End-to-End Thermal Updraft Detection and Estimation for Autonomous Soaring Using Temporal Convolutional Networks* has been presented at the *2024 IEEE International Conference on Robotics and Automation (ICRA)*. If you use our work in your research, please cite our paper:
+> C. Gall, W. Fichter and A. Ahmad, "End-to-End Thermal Updraft Detection and Estimation for Autonomous Soaring Using Temporal Convolutional Networks," 2024 IEEE International Conference on Robotics and Automation (ICRA), Yokohama, Japan, 2024, pp. 17875-17881, [doi: 10.1109/ICRA57147.2024.10611479](https://doi.org/10.1109/ICRA57147.2024.10611479).
 
 ## Getting Started
-Please execute these commands in a terminal to download the code, create a virtual environment using [conda](https://docs.anaconda.com/free/miniconda/index.html), and install the required packages:
+If you would like to use [conda](https://docs.anaconda.com/free/miniconda/index.html), you may execute these commands in a terminal to download the code, create a virtual environment, and install the required packages:
 
 ```bash
 git clone https://github.com/robot-perception-group/tcn-updrafts-estimator.git
